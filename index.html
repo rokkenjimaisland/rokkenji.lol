@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>wolf's profile.</title>
+    <meta name="description" content="A static HTML/CSS/JS recreation of the wolf.lol beta profile experience." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="theme-blue">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <canvas id="stars" aria-hidden="true"></canvas>
+
+    <main class="stage" id="profile-view">
+      <button class="more-button" id="open-more" type="button">More</button>
+
+      <section class="profile-card glass tilt-card" aria-labelledby="profile-name">
+        <div class="avatar-ring">
+          <div class="avatar" role="img" aria-label="Profile avatar with wolf initial">w</div>
+        </div>
+
+        <h1 id="profile-name">wolf.</h1>
+        <div class="badges" aria-label="Profile badges">
+          <button type="button" title="owner">owner.</button>
+          <button type="button" title="og">og.</button>
+          <button type="button" title="developer">developer.</button>
+          <button type="button" title="staff">staff.</button>
+        </div>
+        <p class="tagline">wolf.</p>
+
+        <div class="presence-grid">
+          <article class="presence-card">
+            <div class="presence-art spotify-art" aria-hidden="true">♪</div>
+            <div>
+              <span>spotify</span>
+              <strong id="spotify-song">not listening</strong>
+              <small>waiting for profile</small>
+            </div>
+          </article>
+          <article class="presence-card">
+            <div class="presence-art discord-art" aria-hidden="true">☾</div>
+            <div>
+              <span>discord profile</span>
+              <strong id="discord-status">loading profile...</strong>
+              <small>checking status</small>
+            </div>
+          </article>
+        </div>
+
+        <nav class="social-links" aria-label="Social links">
+          <a href="https://www.roblox.com/" aria-label="Roblox">R</a>
+          <a href="https://open.spotify.com/" aria-label="Spotify">S</a>
+          <a href="https://www.tiktok.com/" aria-label="TikTok">T</a>
+        </nav>
+
+        <p class="views"><span id="view-count">192,729</span> Profile Views</p>
+      </section>
+    </main>
+
+    <section class="panel-shell hidden" id="more-view" aria-live="polite">
+      <div class="panel glass" data-panel="home">
+        <button class="back-link" type="button" data-action="close">Back to Profile</button>
+        <h2>More</h2>
+        <div class="menu-grid">
+          <button type="button" data-open="music">Music Player</button>
+          <button type="button" data-open="interests">Interests</button>
+          <button type="button" data-open="movies">Movies</button>
+          <button type="button" data-open="presets">Presets</button>
+          <button type="button" data-open="messages">Messages</button>
+        </div>
+      </div>
+
+      <div class="panel glass hidden" data-panel="movies">
+        <button class="back-link" type="button" data-open="home">Back</button>
+        <h2>Movies</h2>
+        <h3>vr-m.net embedded player</h3>
+        <p>vr-m.net is embedded directly below so the movie/show tool can stay inside wolf.lol instead of sending you to a separate tab. Use it only with videos you are allowed to watch and share.</p>
+        <div class="movie-actions">
+          <button id="reload-frame" type="button">Reload Embed</button>
+          <a href="https://vr-m.net/" target="_blank" rel="noreferrer">Open Full Page</a>
+        </div>
+        <div class="embed-card"><iframe id="movie-frame" title="vr-m.net embedded player" src="about:blank"></iframe></div>
+        <small id="movie-status">Loaded vr-m.net inside this page.</small>
+      </div>
+
+      <div class="panel glass hidden" data-panel="messages">
+        <button class="back-link" type="button" data-open="home">Back</button>
+        <h2>comments</h2>
+        <div class="comment-profile">
+          <div class="comment-avatar" id="comment-preview">w</div>
+          <div>
+            <h3>comment profile</h3>
+            <label>username <input id="comment-name" maxlength="18" placeholder="wolf fan" /></label>
+            <label>pfp image url <input id="comment-pfp" placeholder="https://..." /></label>
+            <button id="save-comment-profile" type="button">Save</button>
+          </div>
+        </div>
+        <textarea id="comment-text" rows="4" placeholder="leave a message..."></textarea>
+        <button id="post-comment" type="button">Post</button>
+        <div id="messages-list" class="messages-list">loading messages...</div>
+      </div>
+
+      <div class="panel glass hidden" data-panel="presets">
+        <button class="back-link" type="button" data-open="home">Back</button>
+        <h2>Presets</h2>
+        <div class="preset-grid">
+          <button type="button" data-theme="blue">Blue</button>
+          <button type="button" data-theme="orange">Orange</button>
+          <button type="button" data-theme="mono">Monochrome</button>
+          <button type="button" data-theme="dark">Dark</button>
+        </div>
+      </div>
+
+      <div class="panel glass hidden" data-panel="music">
+        <button class="back-link" type="button" data-open="home">Back</button>
+        <h2>Music Player</h2>
+        <p>Select an artist to open their player.</p>
+        <div class="music-player">
+          <div class="album-art" id="album-art">♫</div>
+          <strong id="track-title">No track selected</strong>
+          <small id="artist-name">choose an artist below</small>
+          <div class="player-controls">
+            <button type="button" id="prev-track">Prev</button>
+            <button type="button" id="play-track">Play</button>
+            <button type="button" id="next-track">Next</button>
+            <button type="button" id="loop-track">Loop: off</button>
+          </div>
+          <div class="artist-list" id="artist-list"></div>
+        </div>
+      </div>
+
+      <div class="panel glass hidden" data-panel="interests">
+        <button class="back-link" type="button" data-open="home">Back</button>
+        <h2>Interests - Movies/Shows</h2>
+        <div class="tabs" id="interest-tabs"></div>
+        <button class="next-button" type="button" data-open="characters">Next</button>
+        <article class="interest-card">
+          <div class="poster" id="interest-image"></div>
+          <div><h3 id="interest-name"></h3><p id="interest-description"></p></div>
+        </article>
+      </div>
+
+      <div class="panel glass hidden" data-panel="characters">
+        <button class="back-link" type="button" data-open="interests">Back</button>
+        <h2>Interests - Characters</h2>
+        <div class="tabs" id="character-tabs"></div>
+        <button class="next-button" type="button" data-open="vr">Next</button>
+        <article class="interest-card">
+          <div class="poster character-poster" id="character-image"></div>
+          <div><h3 id="character-name"></h3><p id="character-description"></p></div>
+        </article>
+      </div>
+
+      <div class="panel glass hidden" data-panel="vr">
+        <button class="back-link" type="button" data-open="characters">Back</button>
+        <h2>Interests - VR</h2>
+        <div class="tabs"><button class="active" type="button">VRChat</button><button type="button">ChilloutVR</button></div>
+        <article class="interest-card">
+          <div class="poster vr-poster">VR</div>
+          <div><h3>VRChat</h3><p>VRChat is a social virtual reality platform where users interact through custom 3D avatars in user-created worlds, offering limitless creative and social experiences.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
