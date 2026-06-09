@@ -4,159 +4,166 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>wolf's profile.</title>
-    <meta name="description" content="Static recreation of wolf.lol beta in plain HTML, CSS, and JavaScript." />
+    <meta name="description" content="A static HTML/CSS/JS recreation of the wolf.lol beta profile experience." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="theme-blue">
-    <div class="page-bg" aria-hidden="true"></div>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <canvas id="stars" aria-hidden="true"></canvas>
 
-    <main class="profile-page" id="profile-view">
+    <main class="stage" id="profile-view">
       <button class="more-button" id="open-more" type="button">More</button>
 
-      <section class="profile-card" aria-labelledby="profile-name">
-        <img class="profile-photo" src="https://wolfiinator.github.io/wolf.lol-beta/assets/profile.gif" alt="Profile" />
-        <h1 id="profile-name">wolf.</h1>
-
-        <div class="badges" aria-label="Profile badges">
-          <span>owner.</span>
-          <span>og.</span>
-          <span>developer.</span>
-          <span>staff.</span>
+      <section class="profile-card glass tilt-card" aria-labelledby="profile-name">
+        <div class="avatar-ring">
+          <div class="avatar" role="img" aria-label="Profile avatar with wolf initial">w</div>
         </div>
 
-        <p class="bio">wolf.</p>
+        <h1 id="profile-name">wolf.</h1>
+        <div class="badges" aria-label="Profile badges">
+          <button type="button" title="owner">owner.</button>
+          <button type="button" title="og">og.</button>
+          <button type="button" title="developer">developer.</button>
+          <button type="button" title="staff">staff.</button>
+        </div>
+        <p class="tagline">wolf.</p>
 
-        <div class="activity-stack" aria-label="Activity cards">
-          <article class="activity-card">
-            <img src="https://wolfiinator.github.io/wolf.lol-beta/assets/profile.gif" alt="Spotify album art" />
-            <p><strong>spotify</strong> <span>not listening</span> <small>waiting for profile</small></p>
+        <div class="presence-grid">
+          <article class="presence-card">
+            <div class="presence-art spotify-art" aria-hidden="true">♪</div>
+            <div>
+              <span>spotify</span>
+              <strong id="spotify-song">not listening</strong>
+              <small>waiting for profile</small>
+            </div>
           </article>
-
-          <article class="activity-card">
-            <img src="https://wolfiinator.github.io/wolf.lol-beta/assets/profile.gif" alt="Discord avatar" />
-            <p><strong>discord profile</strong> <span>loading profile...</span> <small>checking status</small></p>
+          <article class="presence-card">
+            <div class="presence-art discord-art" aria-hidden="true">☾</div>
+            <div>
+              <span>discord profile</span>
+              <strong id="discord-status">loading profile...</strong>
+              <small>checking status</small>
+            </div>
           </article>
         </div>
 
         <nav class="social-links" aria-label="Social links">
-          <a class="roblox" href="https://www.roblox.com/" aria-label="Roblox" target="_blank" rel="noreferrer"></a>
-          <a class="spotify" href="https://open.spotify.com/" aria-label="Spotify" target="_blank" rel="noreferrer"></a>
-          <a class="tiktok" href="https://www.tiktok.com/" aria-label="TikTok" target="_blank" rel="noreferrer"></a>
+          <a href="https://www.roblox.com/" aria-label="Roblox">R</a>
+          <a href="https://open.spotify.com/" aria-label="Spotify">S</a>
+          <a href="https://www.tiktok.com/" aria-label="TikTok">T</a>
         </nav>
 
-        <p class="views">192,729 Profile Views</p>
+        <p class="views"><span id="view-count">192,729</span> Profile Views</p>
       </section>
     </main>
 
-    <section class="overlay hidden" id="more-view" aria-live="polite">
-      <article class="modal" data-panel="home">
-        <button class="back" type="button" data-action="close">Back to Profile</button>
+    <section class="panel-shell hidden" id="more-view" aria-live="polite">
+      <div class="panel glass" data-panel="home">
+        <button class="back-link" type="button" data-action="close">Back to Profile</button>
         <h2>More</h2>
-        <div class="menu-list">
+        <div class="menu-grid">
           <button type="button" data-open="music">Music Player</button>
           <button type="button" data-open="interests">Interests</button>
           <button type="button" data-open="movies">Movies</button>
           <button type="button" data-open="presets">Presets</button>
           <button type="button" data-open="messages">Messages</button>
         </div>
-      </article>
+      </div>
 
-      <article class="modal hidden" data-panel="movies">
-        <button class="back" type="button" data-open="home">Back</button>
+      <div class="panel glass hidden" data-panel="movies">
+        <button class="back-link" type="button" data-open="home">Back</button>
         <h2>Movies</h2>
         <h3>vr-m.net embedded player</h3>
         <p>vr-m.net is embedded directly below so the movie/show tool can stay inside wolf.lol instead of sending you to a separate tab. Use it only with videos you are allowed to watch and share.</p>
-        <div class="row-actions">
+        <div class="movie-actions">
           <button id="reload-frame" type="button">Reload Embed</button>
           <a href="https://vr-m.net/" target="_blank" rel="noreferrer">Open Full Page</a>
         </div>
-        <iframe id="movie-frame" title="vr-m.net embedded player" src="https://vr-m.net/"></iframe>
+        <div class="embed-card"><iframe id="movie-frame" title="vr-m.net embedded player" src="about:blank"></iframe></div>
         <small id="movie-status">Loaded vr-m.net inside this page.</small>
-      </article>
+      </div>
 
-      <article class="modal hidden" data-panel="messages">
-        <button class="back" type="button" data-open="home">Back</button>
+      <div class="panel glass hidden" data-panel="messages">
+        <button class="back-link" type="button" data-open="home">Back</button>
         <h2>comments</h2>
         <div class="comment-profile">
-          <img id="comment-preview" src="https://wolfiinator.github.io/wolf.lol-beta/assets/profile.gif" alt="Your comment profile picture" />
+          <div class="comment-avatar" id="comment-preview">w</div>
           <div>
             <h3>comment profile</h3>
-            <label>username <input id="comment-name" maxlength="18" autocomplete="nickname" /></label>
-            <label>pfp image url <input id="comment-pfp" inputmode="url" placeholder="https://..." /></label>
+            <label>username <input id="comment-name" maxlength="18" placeholder="wolf fan" /></label>
+            <label>pfp image url <input id="comment-pfp" placeholder="https://..." /></label>
             <button id="save-comment-profile" type="button">Save</button>
           </div>
         </div>
-        <div class="comment-compose"><img id="comment-compose-preview" src="https://wolfiinator.github.io/wolf.lol-beta/assets/profile.gif" alt="Your comment profile picture" /><textarea id="comment-text" rows="3" aria-label="Comment message"></textarea></div>
+        <textarea id="comment-text" rows="4" placeholder="leave a message..."></textarea>
         <button id="post-comment" type="button">Post</button>
-        <div class="messages-list" id="messages-list">loading messages...</div>
-      </article>
+        <div id="messages-list" class="messages-list">loading messages...</div>
+      </div>
 
-      <article class="modal hidden" data-panel="presets">
-        <button class="back" type="button" data-open="home">Back</button>
+      <div class="panel glass hidden" data-panel="presets">
+        <button class="back-link" type="button" data-open="home">Back</button>
         <h2>Presets</h2>
-        <div class="menu-list compact">
+        <div class="preset-grid">
           <button type="button" data-theme="blue">Blue</button>
           <button type="button" data-theme="orange">Orange</button>
           <button type="button" data-theme="mono">Monochrome</button>
           <button type="button" data-theme="dark">Dark</button>
         </div>
-      </article>
+      </div>
 
-      <article class="modal hidden" data-panel="music">
-        <button class="back" type="button" data-open="home">Back</button>
+      <div class="panel glass hidden" data-panel="music">
+        <button class="back-link" type="button" data-open="home">Back</button>
         <h2>Music Player</h2>
         <p>Select an artist to open their player.</p>
-        <button class="back secondary" type="button" data-open="artists">Back to Artists</button>
-        <div class="player">
-          <img id="album-art" src="https://wolfiinator.github.io/wolf.lol-beta/assets/profile.gif" alt="Album cover" />
+        <div class="music-player">
+          <div class="album-art" id="album-art">♫</div>
           <strong id="track-title">No track selected</strong>
-          <div class="row-actions">
-            <button id="prev-track" type="button">Prev</button>
-            <button id="play-track" type="button">Play</button>
-            <button id="next-track" type="button">Next</button>
-            <button id="loop-track" type="button">Loop: off</button>
+          <small id="artist-name">choose an artist below</small>
+          <div class="player-controls">
+            <button type="button" id="prev-track">Prev</button>
+            <button type="button" id="play-track">Play</button>
+            <button type="button" id="next-track">Next</button>
+            <button type="button" id="loop-track">Loop: off</button>
           </div>
+          <div class="artist-list" id="artist-list"></div>
         </div>
-        <h3>Music Player</h3>
-      </article>
+      </div>
 
-      <article class="modal hidden" data-panel="artists">
-        <button class="back" type="button" data-open="music">Back</button>
-        <h2>Artists</h2>
-        <div class="menu-list compact" id="artist-list"></div>
-      </article>
-
-      <article class="modal hidden" data-panel="interests">
-        <button class="back" type="button" data-open="home">Back</button>
+      <div class="panel glass hidden" data-panel="interests">
+        <button class="back-link" type="button" data-open="home">Back</button>
         <h2>Interests - Movies/Shows</h2>
         <div class="tabs" id="interest-tabs"></div>
-        <button class="next" type="button" data-open="characters">Next</button>
+        <button class="next-button" type="button" data-open="characters">Next</button>
         <article class="interest-card">
-          <img id="interest-image" alt="Beastars poster art" />
+          <div class="poster" id="interest-image"></div>
           <div><h3 id="interest-name"></h3><p id="interest-description"></p></div>
         </article>
-      </article>
+      </div>
 
-      <article class="modal hidden" data-panel="characters">
-        <button class="back" type="button" data-open="interests">Back</button>
+      <div class="panel glass hidden" data-panel="characters">
+        <button class="back-link" type="button" data-open="interests">Back</button>
         <h2>Interests - Characters</h2>
         <div class="tabs" id="character-tabs"></div>
-        <button class="next" type="button" data-open="vr">Next</button>
+        <button class="next-button" type="button" data-open="vr">Next</button>
         <article class="interest-card">
-          <img id="character-image" alt="Mr. Wolf character art" />
+          <div class="poster character-poster" id="character-image"></div>
           <div><h3 id="character-name"></h3><p id="character-description"></p></div>
         </article>
-      </article>
+      </div>
 
-      <article class="modal hidden" data-panel="vr">
-        <button class="back" type="button" data-open="characters">Back</button>
+      <div class="panel glass hidden" data-panel="vr">
+        <button class="back-link" type="button" data-open="characters">Back</button>
         <h2>Interests - VR</h2>
         <div class="tabs"><button class="active" type="button">VRChat</button><button type="button">ChilloutVR</button></div>
         <article class="interest-card">
-          <img src="https://wolfiinator.github.io/wolf.lol-beta/assets/vrchat.jpg" alt="VRChat artwork" />
+          <div class="poster vr-poster">VR</div>
           <div><h3>VRChat</h3><p>VRChat is a social virtual reality platform where users interact through custom 3D avatars in user-created worlds, offering limitless creative and social experiences.</p></div>
         </article>
-      </article>
+      </div>
     </section>
 
     <script src="script.js"></script>
