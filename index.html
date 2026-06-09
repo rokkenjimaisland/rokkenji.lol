@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>wolf's profile.</title>
+    <meta name="description" content="Static recreation of wolf.lol beta in plain HTML, CSS, and JavaScript." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="theme-blue">
+    <div class="page-bg" aria-hidden="true"></div>
+
+    <main class="profile-page" id="profile-view">
+      <button class="more-button" id="open-more" type="button">More</button>
+
+      <section class="profile-card" aria-labelledby="profile-name">
+        <img class="profile-photo" src="https://api.dicebear.com/9.x/thumbs/svg?seed=wolf&backgroundColor=111827,0f172a&shapeColor=ffffff" alt="Profile" />
+        <h1 id="profile-name">wolf.</h1>
+
+        <div class="badges" aria-label="Profile badges">
+          <span>owner.</span>
+          <span>og.</span>
+          <span>developer.</span>
+          <span>staff.</span>
+        </div>
+
+        <p class="bio">wolf.</p>
+
+        <div class="activity-stack" aria-label="Activity cards">
+          <article class="activity-card">
+            <img src="https://api.dicebear.com/9.x/shapes/svg?seed=spotify&backgroundColor=191414&shape1Color=1db954&shape2Color=ffffff" alt="Spotify album art" />
+            <p><strong>spotify</strong> <span>not listening</span> <small>waiting for profile</small></p>
+          </article>
+
+          <article class="activity-card">
+            <img src="https://api.dicebear.com/9.x/thumbs/svg?seed=discord-wolf&backgroundColor=5865f2,111827" alt="Discord avatar" />
+            <p><strong>discord profile</strong> <span>loading profile...</span> <small>checking status</small></p>
+          </article>
+        </div>
+
+        <nav class="social-links" aria-label="Social links">
+          <a class="roblox" href="https://www.roblox.com/" aria-label="Roblox" target="_blank" rel="noreferrer"></a>
+          <a class="spotify" href="https://open.spotify.com/" aria-label="Spotify" target="_blank" rel="noreferrer"></a>
+          <a class="tiktok" href="https://www.tiktok.com/" aria-label="TikTok" target="_blank" rel="noreferrer"></a>
+        </nav>
+
+        <p class="views">192,729 Profile Views</p>
+      </section>
+    </main>
+
+    <section class="overlay hidden" id="more-view" aria-live="polite">
+      <article class="modal" data-panel="home">
+        <button class="back" type="button" data-action="close">Back to Profile</button>
+        <h2>More</h2>
+        <div class="menu-list">
+          <button type="button" data-open="music">Music Player</button>
+          <button type="button" data-open="interests">Interests</button>
+          <button type="button" data-open="movies">Movies</button>
+          <button type="button" data-open="presets">Presets</button>
+          <button type="button" data-open="messages">Messages</button>
+        </div>
+      </article>
+
+      <article class="modal hidden" data-panel="movies">
+        <button class="back" type="button" data-open="home">Back</button>
+        <h2>Movies</h2>
+        <h3>vr-m.net embedded player</h3>
+        <p>vr-m.net is embedded directly below so the movie/show tool can stay inside wolf.lol instead of sending you to a separate tab. Use it only with videos you are allowed to watch and share.</p>
+        <div class="row-actions">
+          <button id="reload-frame" type="button">Reload Embed</button>
+          <a href="https://vr-m.net/" target="_blank" rel="noreferrer">Open Full Page</a>
+        </div>
+        <iframe id="movie-frame" title="vr-m.net embedded player" src="https://vr-m.net/"></iframe>
+        <small id="movie-status">Loaded vr-m.net inside this page.</small>
+      </article>
+
+      <article class="modal hidden" data-panel="messages">
+        <button class="back" type="button" data-open="home">Back</button>
+        <h2>comments</h2>
+        <div class="comment-profile">
+          <img id="comment-preview" src="https://api.dicebear.com/9.x/thumbs/svg?seed=commenter&backgroundColor=111827" alt="Your comment profile picture" />
+          <div>
+            <h3>comment profile</h3>
+            <label>username <input id="comment-name" maxlength="18" autocomplete="nickname" /></label>
+            <label>pfp image url <input id="comment-pfp" inputmode="url" placeholder="https://..." /></label>
+            <button id="save-comment-profile" type="button">Save</button>
+          </div>
+        </div>
+        <textarea id="comment-text" rows="3" aria-label="Comment message"></textarea>
+        <button id="post-comment" type="button">Post</button>
+        <div class="messages-list" id="messages-list">loading messages...</div>
+      </article>
+
+      <article class="modal hidden" data-panel="presets">
+        <button class="back" type="button" data-open="home">Back</button>
+        <h2>Presets</h2>
+        <div class="menu-list compact">
+          <button type="button" data-theme="blue">Blue</button>
+          <button type="button" data-theme="orange">Orange</button>
+          <button type="button" data-theme="mono">Monochrome</button>
+          <button type="button" data-theme="dark">Dark</button>
+        </div>
+      </article>
+
+      <article class="modal hidden" data-panel="music">
+        <button class="back" type="button" data-open="home">Back</button>
+        <h2>Music Player</h2>
+        <p>Select an artist to open their player.</p>
+        <button class="back secondary" type="button" data-open="artists">Back to Artists</button>
+        <div class="player">
+          <img id="album-art" src="https://api.dicebear.com/9.x/shapes/svg?seed=album&backgroundColor=222222&shape1Color=ffffff" alt="Album cover" />
+          <strong id="track-title">No track selected</strong>
+          <div class="row-actions">
+            <button id="prev-track" type="button">Prev</button>
+            <button id="play-track" type="button">Play</button>
+            <button id="next-track" type="button">Next</button>
+            <button id="loop-track" type="button">Loop: off</button>
+          </div>
+        </div>
+        <h3>Music Player</h3>
+      </article>
+
+      <article class="modal hidden" data-panel="artists">
+        <button class="back" type="button" data-open="music">Back</button>
+        <h2>Artists</h2>
+        <div class="menu-list compact" id="artist-list"></div>
+      </article>
+
+      <article class="modal hidden" data-panel="interests">
+        <button class="back" type="button" data-open="home">Back</button>
+        <h2>Interests - Movies/Shows</h2>
+        <div class="tabs" id="interest-tabs"></div>
+        <button class="next" type="button" data-open="characters">Next</button>
+        <article class="interest-card">
+          <img id="interest-image" alt="Beastars poster art" />
+          <div><h3 id="interest-name"></h3><p id="interest-description"></p></div>
+        </article>
+      </article>
+
+      <article class="modal hidden" data-panel="characters">
+        <button class="back" type="button" data-open="interests">Back</button>
+        <h2>Interests - Characters</h2>
+        <div class="tabs" id="character-tabs"></div>
+        <button class="next" type="button" data-open="vr">Next</button>
+        <article class="interest-card">
+          <img id="character-image" alt="Mr. Wolf character art" />
+          <div><h3 id="character-name"></h3><p id="character-description"></p></div>
+        </article>
+      </article>
+
+      <article class="modal hidden" data-panel="vr">
+        <button class="back" type="button" data-open="characters">Back</button>
+        <h2>Interests - VR</h2>
+        <div class="tabs"><button class="active" type="button">VRChat</button><button type="button">ChilloutVR</button></div>
+        <article class="interest-card">
+          <img src="https://api.dicebear.com/9.x/shapes/svg?seed=vrchat&backgroundColor=111827,2563eb&shape1Color=ffffff" alt="VRChat artwork" />
+          <div><h3>VRChat</h3><p>VRChat is a social virtual reality platform where users interact through custom 3D avatars in user-created worlds, offering limitless creative and social experiences.</p></div>
+        </article>
+      </article>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
