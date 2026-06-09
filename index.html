@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A close HTML/CSS/JS recreation of wolf.lol-beta's animated profile landing page." />
+    <title>wolf's profile.</title>
+    <link rel="preconnect" href="https://raw.githubusercontent.com" />
+    <link rel="preconnect" href="https://api.lanyard.rest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="orange-preset">
+    <video class="video-background" autoplay muted loop playsinline poster="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/pfp4.jpg">
+      <source src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/background.mp4" type="video/mp4" />
+    </video>
+    <div class="video-fallback" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="glitch-overlay" aria-hidden="true"></div>
+    <div class="snow-overlay" aria-hidden="true"></div>
+
+    <main class="page-shell">
+      <section class="profile-card" id="profile-card" aria-label="wolf profile card">
+        <button class="more-button" id="open-more" type="button" aria-controls="more-panel">More</button>
+
+        <div class="profile-grid">
+          <div class="profile-main">
+            <div class="profile-container" aria-label="Profile picture with animated ring">
+              <img class="profile-picture" src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/profile.gif" alt="Profile" />
+            </div>
+
+            <div class="identity-stack">
+              <div class="name-row">
+                <h1>wolf.</h1>
+                <div class="badge-group" aria-label="profile badges">
+                  <span class="badge-card" data-label="owner.">
+                    <img src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/owner.png" alt="owner badge" />
+                  </span>
+                  <span class="badge-card" data-label="og.">
+                    <img src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/og.png" alt="og badge" />
+                  </span>
+                  <span class="badge-card" data-label="developer.">
+                    <img src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/developer.png" alt="developer badge" />
+                  </span>
+                  <span class="badge-card" data-label="staff.">
+                    <img src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/staff.png" alt="staff badge" />
+                  </span>
+                </div>
+              </div>
+              <p class="bio-line">wolf.</p>
+              <p class="clock-line">local time: <strong id="profile-clock">--:--:-- --</strong></p>
+            </div>
+          </div>
+
+          <div class="presence-stack" aria-label="Live presence widgets">
+            <article class="presence-card hidden" id="spotify-presence">
+              <img id="spotify-avatar" src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/profile.gif" alt="Spotify album art" />
+              <div>
+                <p id="spotify-label">spotify</p>
+                <strong id="spotify-song">not listening</strong>
+                <span id="spotify-artist">waiting for profile</span>
+              </div>
+            </article>
+
+            <article class="presence-card" id="discord-presence">
+              <img id="discord-avatar" src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/profile.gif" alt="Discord avatar" />
+              <div>
+                <p id="discord-label">discord profile</p>
+                <strong id="discord-name">loading profile...</strong>
+                <span id="discord-status">checking status</span>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <nav class="social-links" aria-label="social links">
+          <a href="https://www.roblox.com/users/1749773865/profile" aria-label="Roblox profile">▣</a>
+          <a href="https://open.spotify.com/" aria-label="Spotify profile">◉</a>
+          <a href="https://www.tiktok.com/" aria-label="TikTok profile">♪</a>
+        </nav>
+
+        <div class="visitor-counter" aria-label="profile views">
+          <span aria-hidden="true">👁</span>
+          <strong>192,729</strong>
+          <span>Profile Views</span>
+        </div>
+      </section>
+
+      <section class="more-panel" id="more-panel" aria-label="More panel" aria-hidden="true">
+        <div class="panel-header">
+          <button class="back-button" id="close-more" type="button">Back to Profile</button>
+          <h2>More</h2>
+        </div>
+
+        <div class="panel-view is-active" id="more-home-view">
+          <div class="menu-grid">
+            <button data-view="music-view">Music Player</button>
+            <button data-view="interests-view">Interests</button>
+            <button data-view="movies-view">Movies</button>
+            <button data-view="presets-view">Presets</button>
+            <button data-view="messages-view">Messages</button>
+          </div>
+        </div>
+
+        <div class="panel-view" id="movies-view">
+          <button class="back-button sub-back" type="button">Back</button>
+          <h3>Movies</h3>
+          <h4>vr-m.net embedded player</h4>
+          <p>vr-m.net is embedded directly below so the movie/show tool can stay inside wolf.lol instead of sending you to a separate tab.</p>
+          <div class="mock-frame">Loaded vr-m.net inside this page.</div>
+          <div class="button-row"><button>Reload Embed</button><button>Open Full Page</button></div>
+        </div>
+
+        <div class="panel-view" id="messages-view">
+          <button class="back-button sub-back" type="button">Back</button>
+          <h3>comments</h3>
+          <div class="comment-card">
+            <img src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/profile.gif" alt="Your comment profile picture" />
+            <div><strong>comment profile</strong><span>username · pfp image url · Save</span></div>
+          </div>
+          <textarea aria-label="comment box" placeholder="Post"></textarea>
+          <p class="muted">loading messages...</p>
+        </div>
+
+        <div class="panel-view" id="presets-view">
+          <button class="back-button sub-back" type="button">Back</button>
+          <h3>Presets</h3>
+          <div class="preset-grid">
+            <button data-preset="blue-preset">Blue</button>
+            <button data-preset="orange-preset">Orange</button>
+            <button data-preset="mono-preset">Monochrome</button>
+            <button data-preset="dark-preset">Dark</button>
+          </div>
+        </div>
+
+        <div class="panel-view" id="music-view">
+          <button class="back-button sub-back" type="button">Back</button>
+          <h3>Music Player</h3>
+          <p>Select an artist to open their player.</p>
+          <article class="player-card">
+            <img src="https://raw.githubusercontent.com/wolfiinator/wolf.lol-beta/main/assets/profile.gif" alt="Album cover" />
+            <strong>No track selected</strong>
+            <div class="button-row"><button>Prev</button><button>Play</button><button>Next</button><button>Loop: off</button></div>
+          </article>
+        </div>
+
+        <div class="panel-view" id="interests-view">
+          <button class="back-button sub-back" type="button">Back</button>
+          <h3>Interests - Movies/Shows</h3>
+          <div class="tab-row"><button>Beastars</button><button>Fantastic Mr. Fox</button><button>The Bad Guys (1)</button><button>The Bad Guys (2)</button></div>
+          <article class="interest-card">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/BEASTARS%2C_volume_1.jpg/250px-BEASTARS%2C_volume_1.jpg" alt="Beastars poster art" />
+            <div>
+              <h4>Beastars</h4>
+              <p>In this anthropomorphic world, gentle wolf Legoshi struggles with instinct, identity, and love after a classmate's murder deepens the divide between carnivores and herbivores at Cherryton Academy.</p>
+            </div>
+          </article>
+          <h3>Interests - Characters</h3>
+          <div class="tab-row"><button>Mr. Wolf</button><button>Legoshi</button><button>Jack</button></div>
+          <article class="interest-card compact">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/00/The_Bad_Guys_poster.jpeg/250px-The_Bad_Guys_poster.jpeg" alt="Mr. Wolf character art" />
+            <div><h4>Mr. Wolf (The Bad Guys)</h4><p>Smooth, confident, and loyal to the crew.</p></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <aside class="bottom-controls" aria-label="site controls">
+      <div class="theme-strip" aria-label="theme buttons">
+        <button class="theme-dot active" data-preset="orange-preset" type="button" aria-label="Orange theme"></button>
+        <button class="theme-dot blue" data-preset="blue-preset" type="button" aria-label="Blue theme"></button>
+        <button class="theme-dot mono" data-preset="mono-preset" type="button" aria-label="Monochrome theme"></button>
+        <button class="theme-dot dark" data-preset="dark-preset" type="button" aria-label="Dark theme"></button>
+      </div>
+      <div class="slider-strip">
+        <span aria-hidden="true">🔊</span>
+        <input id="volume-slider" type="range" min="0" max="100" value="30" aria-label="volume" />
+        <span aria-hidden="true">◉</span>
+        <input id="transparency-slider" type="range" min="35" max="95" value="72" aria-label="profile transparency" />
+      </div>
+    </aside>
+
+    <script src="script.js"></script>
+  </body>
+</html>
